@@ -1,0 +1,32 @@
+services:
+  cassandra:
+    image: cassandra:5
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    volumes:
+      - ./cassandra_data:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=TalentumCluster
+      - CASSANDRA_START_RPC=true
+      - MAX_HEAP_SIZE=512M
+      - HEAP_NEWSIZE=100M
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
+
+  neo4j:
+    image: neo4j:5
+    container_name: neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/test1234
+    volumes:
+      - ./neo4j_data:/data
